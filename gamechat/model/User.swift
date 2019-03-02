@@ -10,6 +10,7 @@ import UIKit
 
 class User: NSObject {
     //swift 宣告 要交 @objc 不然setvalue(dictionary)會 carash
+    @objc var id:String?
     @objc var email: String?
     @objc var name: String?
     @objc var profileImageUrl: String?

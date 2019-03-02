@@ -34,6 +34,7 @@ class newmessangeControllerTableViewController: UITableViewController {
     if let dictionary = snapshot.value as?[String: AnyObject]{
         //print(dictionary)
         let user = User()
+        user.id = snapshot.key
             //user.set
         //let email = dictionary["email"]
         //let name = dictionary["name"]
@@ -86,6 +87,15 @@ class newmessangeControllerTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 72
+    }
+    
+    var messagesController: MessangeController?
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dismiss(animated: true, completion:nil)
+        print("dismiss completed")
+        let user = self.users[indexPath.row]
+        self.messagesController?.showChatControllerForuser(user: user)
     }
 }
 

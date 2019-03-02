@@ -60,6 +60,9 @@ extension loginViewController: UIImagePickerControllerDelegate,UINavigationContr
                 //print(err)
                 return
             }
+            
+            //self.MessangeController?.fetchuserAndSetupNavBarTitle()
+            self.MessangeController?.navigationItem.title = value["name"]as? String
             self.dismiss(animated: true, completion: nil)
             print("sucess save to firebase")
         })
@@ -87,9 +90,11 @@ extension loginViewController: UIImagePickerControllerDelegate,UINavigationContr
             // [END_EXCLUDE]
             
             let imageName = NSUUID().uuidString
-            let storageRef = Storage.storage().reference().child("profile_image").child("\(imageName).png")
+            let storageRef = Storage.storage().reference().child("profile_image").child("\(imageName).jpg")
             //profileimageview.image?.pngData()
-            if let uploadData = self.profileimageview.image!.pngData(){
+            if let uploadData = self.profileimageview.image?.jpegData(compressionQuality: 0.1){
+            
+           // if let uploadData = self.profileimageview.image!.pngData(){
                 storageRef.putData(uploadData, metadata: nil, completion: { (metadata,error) in
                     if error != nil{
                         print(error as Any)
